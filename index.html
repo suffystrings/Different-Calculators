@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="eng">
+    <head>
+        <title>App</title>
+        <meta charset="UTF-8" />
+         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--  <link rel="stylesheet" href="app.css"> -->
+         <link rel="stylesheet" href="calculator.css">
+             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    </head>
+  <nav class="navbar">
+        <div class="logo">GSY</div>
+
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <body>
+    <div class="mainContainer"> 
+     <div class="grid-wrapper">
+        <h1>Calculator</h1>
+                <span class="arrow-btn">
+                    <a href="./advansMaths.html">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </span>
+                    <input type="text" class="inputText">
+                    <p>suare</p>
+                    <p>degre</p>
+                    <p>C</p>
+                    <p>X</p>
+                    <p>√</p>
+                    <p>%</p>
+                    <p>x²</p>
+                    <p>÷</p>
+                    <p>7</p>
+                    <p>8</p>
+                    <p>9</p>
+                    <p>×</p>
+                    <p>4</p>
+                    <p>5</p>
+                    <p>6</p>
+                    <p>-</p>
+                    <p>1</p>
+                    <p>2</p>
+                    <p>3</p>
+                    <p>.</p>
+                    <p class="add">+</p>
+                    <p>0</p>
+                    <p>=</p>
+        </div>
+    </div>
+    </body>
+    <footer class="footer">
+        <h1>The footer</h1>
+    </footer>
+
+
+<script>
+
+       const display = document.querySelector('.inputText');
+const buttons = document.querySelectorAll('p');
+
+buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        let value = btn.innerText.trim();
+
+        // Clear all
+        if (value === "C") {
+            display.value = "0";
+            return;
+        }
+
+        // Backspace
+        if (value === "X") {
+            display.value = display.value.slice(0, -1) || "0";
+            return;
+        }
+
+        // Replace initial 0 when typing a number
+        if (display.value === "0" && !isNaN(value)) {
+            display.value = value;
+            return;
+        }
+
+        // Square root √
+        if (value === "√") {
+            if (display.value === "") return;
+            display.value = Math.sqrt(parseFloat(display.value));
+            return;
+        }
+
+        // Square x²
+        if (value === "x²") {
+            if (display.value === "") return;
+            let num = parseFloat(display.value);
+            display.value = Math.pow(num, 2);
+            return;
+        }
+
+        // Percent %
+        if (value === "%") {
+            display.value += "/100";
+            return;
+        }
+
+        // Evaluate =
+        if (value === "=") {
+            try {
+                let expression = display.value
+                    .replace(/×/g, "*")
+                    .replace(/÷/g, "/");
+
+                display.value = eval(expression);
+            } catch (e) {
+                display.value = "Error";
+            }
+            return;
+        }
+
+        // Add numbers/operators normally
+        display.value += value;
+    });
+});
+</script>
+
+</html> 

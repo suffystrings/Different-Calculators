@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quadratic Calculator</title>
+    <link rel="stylesheet" href="advansMaths.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    
+</head>
+
+ <nav class="navbar">
+        <div class="logo">GSY</div>
+
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+<body class="body">
+    
+    <div class="container">
+        <span><a href='./calculator.html'><i class="fa-solid fa-arrow-left"></i></a></span>
+
+       
+        <h1>Quadratic Equation Solver</h1>
+        <img class="img" src="./images/Capture.PNG" alt="">
+
+        <div class="input-group">
+            <input type="text" id="a" placeholder="Enter a">
+        </div>
+
+        <div class="input-group">
+            <input type="text" id="b" placeholder="Enter b">
+        </div>
+
+        <div class="input-group">
+            <input type="text" id="c" placeholder="Enter c">
+        </div>
+
+        <button onclick="solveQuadratic()">Solve</button>
+         <button id='C' onclick="Clear">C</button>
+
+        <div id="result"></div>
+    </div>
+
+<script>
+    function solveQuadratic() {
+        let a = parseFloat(document.getElementById("a").value.trim());
+        let b = parseFloat(document.getElementById("b").value.trim());
+        let c = parseFloat(document.getElementById("c").value.trim());
+        let resultDiv = document.getElementById("result");
+
+        if (isNaN(a) || isNaN(b) || isNaN(c)) {
+            resultDiv.innerHTML = "Please enter valid numbers.";
+            return;
+        }
+
+        if (a === 0) {
+            resultDiv.innerHTML = "Coefficient 'a' cannot be 0 in a quadratic equation.";
+            return;
+        }
+
+        let discriminant = b * b - 4 * a * c;
+
+        if (discriminant > 0) {
+            let x1 = (-b + Math.sqrt(discriminant)) / (2 * a);
+            let x2 = (-b - Math.sqrt(discriminant)) / (2 * a);
+            resultDiv.innerHTML = `Two real solutions:<br>x₁ = ${x1}<br>x₂ = ${x2}`;
+        } 
+        else if (discriminant === 0) {
+            let x = -b / (2 * a);
+            resultDiv.innerHTML = `One real solution:<br>x = ${x}`;
+        } 
+        else {
+            let real = (-b / (2 * a)).toFixed(2);
+            let imag = (Math.sqrt(-discriminant) / (2 * a)).toFixed(2);
+            resultDiv.innerHTML = `Complex solutions:<br>x₁ = ${real} + ${imag}i<br>x₂ = ${real} - ${imag}i`;
+        }
+    }
+</script>
+</body>
+</html>
+
